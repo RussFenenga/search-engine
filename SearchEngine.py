@@ -25,16 +25,16 @@ class WordFrequency():
 
         print tag
 
-        if tag is "body":
+        if tag == "body":
             self.body[word] += 1
             print self.body
         elif tag in ["h1", "h2", "h3"]:
             self.header[word] += 1
-        elif tag is "title":
+        elif tag == "title":
             self.title[word] += 1
-        elif tag is "strong":
+        elif tag == "strong":
             self.strong[word] += 1
-        elif tag is "b":
+        elif tag == "b":
             self.strong[word] += 1
 
 
@@ -49,7 +49,7 @@ class HTMLFileParser(HTMLParser):
         self.tags.append("title")
 
     def handle_starttag(self, tag, attrs):
-        if tag is "body":
+        if tag == "body":
             self.tags.pop()
         self.tags.append(tag)
         print "Encountered a start tag:", tag
@@ -61,7 +61,7 @@ class HTMLFileParser(HTMLParser):
 
     def handle_data(self, data):
         for word in re.split("[^A-Za-z0-9]+", data.rstrip().lower()):
-            if word is not "":
+            if word != "":
                 self.words.appendWord(word, self.tags[-1])
 
     def getWords(self):
